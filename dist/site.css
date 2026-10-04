@@ -1,0 +1,387 @@
+/* Public pages of Voice Sales Register: the same street-signboard look as the app.
+   Black on white for sunlight, signboard yellow for totals, condensed Teko numerals for prices. */
+
+@font-face {
+    font-family: "Teko";
+    font-weight: 600;
+    font-display: swap;
+    src: url("fonts/teko-600.woff2") format("woff2");
+    unicode-range: U+0000-00FF, U+2000-206F, U+2212;
+}
+
+@font-face {
+    font-family: "Teko";
+    font-weight: 600;
+    font-display: swap;
+    src: url("fonts/teko-600-rupee.woff2") format("woff2");
+    unicode-range: U+20B9;
+}
+
+:root {
+    --ink: #000000;
+    --paper: #ffffff;
+    --sign: #ffcc00;
+    --sindoor: #e0242b;
+    --slate: #5b6670;
+    --line: #d5d9dd;
+    --wash: #f3f4f5;
+    --text: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif;
+    --num: "Teko", "Roboto Condensed", system-ui, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 46rem;
+    padding: 0 1.25rem 2rem;
+    background: var(--paper);
+    color: var(--ink);
+    font: 400 1.0625rem/1.6 var(--text);
+}
+
+a {
+    color: var(--ink);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    overflow-wrap: anywhere; /* long addresses never push the page wider than a small phone */
+}
+
+a:focus-visible,
+.button:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 3px;
+}
+
+/* Header: logo, name and maker, then the page links */
+.top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 1.5rem;
+    padding: 1rem 0 0.75rem;
+    border-bottom: 3px solid var(--ink);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.brand strong {
+    display: block;
+    font-size: 1.125rem;
+    line-height: 1.2;
+}
+
+.brand small {
+    display: block;
+    color: var(--slate);
+    font-size: 0.875rem;
+}
+
+.top nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+.top nav a {
+    display: inline-block;
+    padding: 0.5rem 0;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+}
+
+.top nav a:hover,
+.top nav a[aria-current="page"] {
+    border-bottom-color: var(--sign);
+}
+
+main {
+    padding-top: 1.5rem;
+}
+
+h1 {
+    margin: 0.5rem 0 1rem;
+    font-size: clamp(2rem, 6vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+}
+
+h2 {
+    margin: 2.25rem 0 0.5rem;
+    font-size: 1.375rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+h3 {
+    margin: 1.5rem 0 0.25rem;
+    font-size: 1.0625rem;
+    font-weight: 700;
+}
+
+p,
+li,
+dd {
+    max-width: 38em;
+}
+
+.lead {
+    font-size: 1.1875rem;
+}
+
+.meta,
+.note,
+figcaption {
+    color: var(--slate);
+    font-size: 0.9375rem;
+}
+
+/* Product page: the spoken order beside the bill it makes */
+.hero {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.hero h1 {
+    font-size: clamp(2rem, 4.6vw, 2.5rem);
+}
+
+@media (min-width: 44rem) {
+    .hero {
+        grid-template-columns: 1.3fr 1fr;
+    }
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 3.25rem;
+    padding: 0 1.5rem;
+    border-radius: 0.875rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-decoration: none;
+}
+
+.quiet {
+    font-weight: 600;
+}
+
+.bill {
+    margin: 0;
+    border: 3px solid var(--ink);
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background: var(--paper);
+}
+
+.bill .said {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.mic {
+    flex: none;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-radius: 50%;
+    background: var(--sindoor);
+}
+
+.bill ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.bill li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.45rem 1rem;
+    border-bottom: 1px solid var(--line);
+    font-size: 1.125rem;
+}
+
+.num {
+    font-family: var(--num);
+    font-weight: 600;
+    font-size: 1.75rem;
+    line-height: 1;
+}
+
+.bill .total {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 0;
+    padding: 0.3rem 1rem 0;
+    background: var(--sign);
+    font-weight: 700;
+    font-size: 1.125rem;
+}
+
+.bill .total .num {
+    font-size: 3.5rem;
+    line-height: 0.95;
+}
+
+.bill figcaption {
+    padding: 0.6rem 1rem;
+}
+
+/* Steps really are a sequence, so they are numbered */
+.steps {
+    padding-left: 1.5rem;
+}
+
+.steps li {
+    margin: 0.6rem 0;
+    padding-left: 0.25rem;
+}
+
+.steps li::marker {
+    font-family: var(--num);
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.plain {
+    padding-left: 1.25rem;
+    list-style: square;
+}
+
+.plain li {
+    margin: 0.4rem 0;
+}
+
+section + section {
+    margin-top: 2.5rem;
+    border-top: 3px solid var(--ink);
+}
+
+section + section > h2:first-child {
+    margin-top: 1.25rem;
+}
+
+.toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 1rem 0 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.875rem;
+    background: var(--wash);
+}
+
+.facts {
+    display: grid;
+    grid-template-columns: minmax(9rem, max-content) 1fr;
+    gap: 0.5rem 1.25rem;
+    margin: 1rem 0 1.5rem;
+}
+
+.facts dt {
+    font-weight: 700;
+}
+
+.facts dd {
+    margin: 0;
+}
+
+@media (max-width: 30rem) {
+    .facts {
+        grid-template-columns: 1fr;
+        gap: 0.1rem;
+    }
+
+    .facts dd {
+        margin-bottom: 0.6rem;
+    }
+}
+
+.table {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+}
+
+th,
+td {
+    padding: 0.55rem 0.5rem;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    border-bottom: 2px solid var(--ink);
+}
+
+/* Details still to be filled in (site.config.js) */
+mark.todo {
+    padding: 0 0.2em;
+    background: var(--sign);
+    color: var(--ink);
+    outline: 2px dashed var(--ink);
+}
+
+footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 3px solid var(--ink);
+    color: var(--slate);
+    font-size: 0.9375rem;
+}
+
+footer p {
+    margin: 0.4rem 0;
+}
+
+footer .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+}
+
+footer .links a {
+    display: inline-block;
+    padding: 0.35rem 0;
+}
